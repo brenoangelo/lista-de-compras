@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de compras</title>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/e72c3bd2a1.js" crossorigin="anonymous"></script>
+    
+    <!--GOOGLE FONTS-->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" 
+    rel="stylesheet">
+    
+    <!--CSS-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <div class="compras-container">
+        <div class="compras-lista">
+            <h1><i class="fab fa-opencart"></i> Lista de compras</h1>
+            <form>
+                <input onfocus="limparCampos()" id="nome" type="text" placeholder="informe o produto...">
+                <input onfocus="limparCampos()" id="valor" type="number" placeholder="R$">
+                <button type="button" onclick="adicionar()"><i class="fas fa-pencil-alt"></i> anotar</button>
+            </form>
+
+            <div class="lista">
+                <table>
+                    
+                    
+                </table>
+                <div class="valor-total">
+                    <h3>Total</h3>
+                    <h3>Valor</h3>
+                </div>
+                
+            </div>
+        </div><!--compras-lista-->
+    </div><!--compras-container-->
+
+    <!--JavaScript-->
+    <script src="js/script.js"></script>
+</body>
+</html>
