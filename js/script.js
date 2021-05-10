@@ -1,5 +1,5 @@
 /* LEMBRETE! */
-/* FINALIZAR PERSISTENCIA DE DADOS NO NAVEGADOR */
+/**/
 /* */
 
  /*const listaProdutos = [] */
@@ -44,7 +44,8 @@ function exibir(){
                             <td class="valor-estilo">R$ ${prod.valor}</td>`
         
     })
-
+    
+    total = (parseFloat(total)).toFixed(2)
     body_total.innerHTML = `R$ ${total}`
 
     removerProduto()
@@ -59,7 +60,6 @@ function testar(){
     /* VARIAVEIS */
     var nome_produto = document.querySelector('#nome').value
     var valor_produto = document.querySelector('#valor').value
-    
     
     if(listaProdutos.find(prodIgual) !== undefined){
         alert('Produto já está na lista')
@@ -89,7 +89,8 @@ function adicionar(nome, valor){
     item.nome = nome
     item.valor = valor
     */
-
+    
+    valor = (parseFloat(valor)).toFixed(2)
     const item = JSON.stringify({
         nome: nome,
         valor: valor
