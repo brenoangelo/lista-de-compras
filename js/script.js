@@ -1,8 +1,24 @@
 /* LEMBRETE! */
-/* CRIAR FILTROS PARA EVITAR REPETIÇÃO DE PRODUTOS E CRIAR A SOMA DE TUDO */
-const listaProdutos = []
+/* FINALIZAR PERSISTENCIA DE DADOS NO NAVEGADOR */
+/* */
+
+ /*const listaProdutos = [] */
+ var listaProdutos = localStorage.getItem('listaProdutos')
+ listaProdutos = JSON.parse(listaProdutos)
+
+ if(listaProdutos == null){
+    listaProdutos = []
+ }
 
 exibir()
+
+function prodIgual(produto){
+    var nome = document.querySelector('#nome').value
+    produto = JSON.parse(produto)
+    
+    return produto.nome.toLowerCase() === nome
+
+}
 
 
 function exibir(){
@@ -10,20 +26,22 @@ function exibir(){
     var table = document.querySelector('table')
     var body_total = document.querySelector('.valor-total h3:nth-of-type(2)')
 
-    
     table.innerHTML = `<tr>
                             <th>Produto</th>
                             <th>Valor</th>
                         </tr>
                         
                         `
+    
     listaProdutos.forEach((value,index)=>{
-         total = total + parseFloat(value.valor)
+         var prod = JSON.parse(listaProdutos[index])
+         
+         total = total + parseFloat(prod.valor)
 
        
-        table.innerHTML+= `<td class="nome-estilo">${value.nome} 
+        table.innerHTML+= `<td class="nome-estilo">${prod.nome} 
         <span class="btn-remover"><i class="far fa-trash-alt"></i></span></td>
-                            <td class="valor-estilo">R$ ${value.valor}</td>`
+                            <td class="valor-estilo">R$ ${prod.valor}</td>`
         
     })
 
@@ -35,23 +53,18 @@ function exibir(){
 
 
 
-function adicionar(){
+
+function testar(){
     
     /* VARIAVEIS */
     var nome_produto = document.querySelector('#nome').value
     var valor_produto = document.querySelector('#valor').value
-
     
-
-    listaProdutos.forEach((value)=>{
-       
-        if(value.nome.toLowerCase() == nome_produto.toLowerCase()){    
-            alert('Produto já está na lista.')
-            nome_produto = ""
-            return false
-        }
-    })
-
+    
+    if(listaProdutos.find(prodIgual) !== undefined){
+        alert('Produto já está na lista')
+        return false
+    } 
 
         /*Valida se foi preenchido */
     if(nome_produto == "" || valor_produto == ""){
@@ -66,15 +79,25 @@ function adicionar(){
     }
 
     
-
-    const item = new Object()
-    item.nome = nome_produto
-    item.valor = valor_produto
-    listaProdutos.push(item)
-
-    limparCampos(nome_produto, valor_produto)
-    alert(nome_produto)
+    adicionar(nome_produto, valor_produto)
     exibir()
+}
+
+
+function adicionar(nome, valor){
+    /*const item = new Object()
+    item.nome = nome
+    item.valor = valor
+    */
+
+    const item = JSON.stringify({
+        nome: nome,
+        valor: valor
+    })
+    listaProdutos.push(item)
+    localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos))
+    
+    return true
 }
 
 
@@ -84,9 +107,11 @@ function removerProduto(){
     btn_remover.forEach((value, index)=>{
         
         btn_remover[index].addEventListener('click', ()=>{
+            
             listaProdutos.splice(index, 1)
+            localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos))
             exibir()
-            console.log(listaProdutos)
+            
         })
         
         
@@ -94,9 +119,14 @@ function removerProduto(){
     
 }
 
-function limparCampos(nome, valor){
-    nome = ""
-    valor = ""
+function limparCampos(){
+    var input = document.querySelectorAll('input')
+
+    input.forEach((value)=>{
+        value.addEventListener('click', ()=>{
+            value.value = ""
+        })
+    })
     
 }
 
