@@ -24,6 +24,8 @@
             <form>
                 <input onfocus="limparCampos()" id="nome" type="text" placeholder="informe o produto...">
                 <input onfocus="limparCampos()" id="valor" type="number" placeholder="R$">
+                <input onfocus="limparCampos()" id="quant" type="number" placeholder="Quant...">
+                
                 <button type="button" onclick="testar()"><i class="fas fa-pencil-alt"></i> anotar</button>
             </form>
 
@@ -33,8 +35,9 @@
                     
                 </table>
                 <div class="valor-total">
-                    <h3>Total</h3>
-                    <h3>Valor</h3>
+                    <h3>Total <i class="far fa-eye-slash" id="olho-fechado"></i> 
+                        <i class="far fa-eye" id="olho-aberto"></i></h3>
+                    <h3><strong class="">Valor</strong></h3>
                 </div>
                 
             </div>

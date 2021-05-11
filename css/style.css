@@ -65,6 +65,11 @@ form input:nth-of-type(2){
     width: 20%;
 }
 
+form input:nth-of-type(3){
+    font-size: 20px;
+    width: 20%;
+}
+
 form button{
     width: 20%;
     font-size: 20px;
@@ -135,9 +140,35 @@ td{
     line-height: 45px;
     color: white;
     border-radius: 25px;
+    
 }
 
-.btn-remover{
+.btn-remover i{
     cursor: pointer;
     color: rgb(233, 64, 64);
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.btn-remover i:hover{
+    
+    transform: scale(1.2);
+}
+
+h3 > i{
+    font-size: 24px;
+}
+
+#olho-aberto{
+    display: none;
+    cursor: pointer;
+}
+
+#olho-fechado{
+    cursor: pointer;
+}
+
+.blur{
+    filter: blur(5px);
+    transition: 0.3s;
 }

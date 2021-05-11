@@ -6,6 +6,10 @@
  var listaProdutos = localStorage.getItem('listaProdutos')
  listaProdutos = JSON.parse(listaProdutos)
 
+ var olho_aberto = document.querySelector('#olho-aberto')
+ var olho_fechado = document.querySelector('#olho-fechado')
+ var valor_total = document.querySelector('.valor-total > h3:nth-of-type(2) > strong')
+
  if(listaProdutos == null){
     listaProdutos = []
  }
@@ -22,9 +26,10 @@ function prodIgual(produto){
 
 
 function exibir(){
+    // Variáveis
     var total = 0
     var table = document.querySelector('table')
-    var body_total = document.querySelector('.valor-total h3:nth-of-type(2)')
+    var body_total = document.querySelector('.valor-total > h3:nth-of-type(2) > strong')
 
     table.innerHTML = `<tr>
                             <th>Produto</th>
@@ -32,21 +37,31 @@ function exibir(){
                         </tr>
                         
                         `
-    
+                        
     listaProdutos.forEach((value,index)=>{
+        
          var prod = JSON.parse(listaProdutos[index])
-         
-         total = total + parseFloat(prod.valor)
+         total = total + parseFloat(prod.total)
 
        
-        table.innerHTML+= `<td class="nome-estilo">${prod.nome} 
-        <span class="btn-remover"><i class="far fa-trash-alt"></i></span></td>
-                            <td class="valor-estilo">R$ ${prod.valor}</td>`
+        table.innerHTML+= `<td class="nome-estilo"><strong>${prod.quant}x</strong> ${prod.nome} - <small>R$ ${prod.valor}</small>
+        <span class="btn-remover"><i class="far fa-trash-alt"></i></span> </td>
+                            <td class="valor-estilo">R$ ${prod.total}</td>`
+        
+        if(prod.quant < 2){
+            var strong = document.querySelectorAll('strong')
+            var small = document.querySelectorAll('small')
+            strong[index].style.display = "none"
+            small[index].style.display = "none"
+        }
+
         
     })
     
     total = (parseFloat(total)).toFixed(2)
     body_total.innerHTML = `R$ ${total}`
+
+    
 
     removerProduto()
     
@@ -60,6 +75,7 @@ function testar(){
     /* VARIAVEIS */
     var nome_produto = document.querySelector('#nome').value
     var valor_produto = document.querySelector('#valor').value
+    var quant_produto = document.querySelector('#quant').value
     
     if(listaProdutos.find(prodIgual) !== undefined){
         alert('Produto já está na lista')
@@ -79,21 +95,20 @@ function testar(){
     }
 
     
-    adicionar(nome_produto, valor_produto)
+    adicionar(nome_produto, valor_produto, quant_produto)
     exibir()
 }
 
 
-function adicionar(nome, valor){
-    /*const item = new Object()
-    item.nome = nome
-    item.valor = valor
-    */
-    
+function adicionar(nome, valor, quant){
     valor = (parseFloat(valor)).toFixed(2)
+    quant = parseInt(quant)
+    
     const item = JSON.stringify({
         nome: nome,
-        valor: valor
+        valor: valor,
+        quant: quant,
+        total : (valor * quant).toFixed(2)
     })
     listaProdutos.push(item)
     localStorage.setItem('listaProdutos', JSON.stringify(listaProdutos))
@@ -132,8 +147,16 @@ function limparCampos(){
 }
 
 
+olho_fechado.addEventListener('click', ()=>{
+    valor_total.classList.add('blur')
+    olho_fechado.style.display = 'none'
+    olho_aberto.style.display = 'initial'
+})
+
+olho_aberto.addEventListener('click', ()=>{
+    valor_total.classList.remove('blur')
+    olho_fechado.style.display = 'initial'
+    olho_aberto.style.display = 'none'
+})
 
 
-    
-
-    
