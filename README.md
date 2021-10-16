@@ -1,10 +1,10 @@
 <h1 align="center">
-    <a href="https://tarefas-c9ee5.web.app">Lista de compras</a>
+    Lista de compras
 </h1>
 <p align="center">Um app para listar suas compras.</p>
 
 <h1 align="center">
-  <img alt="todoapp" title="#Todoapp" src="https://user-images.githubusercontent.com/55797343/119545315-0f3ffe80-bd69-11eb-93df-4d655ffa7659.png" />
+  <img alt="Lista de compras" title="#Lista-de-compras" src="https://user-images.githubusercontent.com/55797343/119545315-0f3ffe80-bd69-11eb-93df-4d655ffa7659.png" />
 </h1>
 
 <!--ts-->
